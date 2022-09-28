@@ -8,7 +8,7 @@ Add assertions to be aware that your complex gradle build tasks hierarchy is sti
 
     ```groovy
     plugins {
-        id 'com.dsvoronin.task-graph-assertions'
+        id 'com.revolut.task-graph-assertions'
     }
     
     taskGraphAssertions {

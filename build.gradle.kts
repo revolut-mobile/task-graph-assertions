@@ -5,7 +5,7 @@ plugins {
     `java-gradle-plugin`
 }
 
-group = "com.dsvoronin"
+group = "com.revolut"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -38,8 +38,8 @@ kotlin {
 gradlePlugin {
     plugins {
         create("task-graph-assertions") {
-            id = "com.dsvoronin.task-graph-assertions"
-            implementationClass = "com.dsvoronin.TaskGraphAssertionsPlugin"
+            id = "com.revolut.task-graph-assertions"
+            implementationClass = "com.revolut.TaskGraphAssertionsPlugin"
         }
     }
 }

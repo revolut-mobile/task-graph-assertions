@@ -1,4 +1,4 @@
-package com.dsvoronin
+package com.revolut
 
 import org.gradle.api.Action
 import org.gradle.api.NamedDomainObjectContainer

@@ -1,4 +1,4 @@
-package com.dsvoronin
+package com.revolut
 
 internal class AssertionsContainer(
     private val path: String,

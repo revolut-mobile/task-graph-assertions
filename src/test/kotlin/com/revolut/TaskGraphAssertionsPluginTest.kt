@@ -1,4 +1,4 @@
-package com.dsvoronin
+package com.revolut
 
 import com.google.common.truth.Truth
 import org.gradle.testkit.runner.BuildResult
@@ -111,7 +111,7 @@ class TaskGraphAssertionsPluginTest {
             "build.gradle", """
             |plugins {
             |   id 'base'
-            |   id 'com.dsvoronin.task-graph-assertions'
+            |   id 'com.revolut.task-graph-assertions'
             |}
             |
             |taskGraphAssertions {
