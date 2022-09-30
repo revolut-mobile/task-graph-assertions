@@ -2,11 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.7.10"
-    `java-gradle-plugin`
+    id("com.gradle.plugin-publish") version "1.0.0"
 }
 
 group = "com.revolut"
-version = "1.0-SNAPSHOT"
+version = "0.1"
 
 repositories {
     mavenCentral()
@@ -40,6 +40,15 @@ gradlePlugin {
         create("task-graph-assertions") {
             id = "com.revolut.task-graph-assertions"
             implementationClass = "com.revolut.TaskGraphAssertionsPlugin"
+            displayName = "Task Graph Assertions Plugin"
+            description = "Add assertions to be aware that your complex gradle build tasks hierarchy is still here"
         }
     }
+}
+
+pluginBundle {
+    website = "https://github.com/revolut-mobile/task-graph-assertions#readme"
+    vcsUrl = "https://github.com/revolut-mobile/task-graph-assertions"
+
+    tags = listOf("validation", "task-graph")
 }
