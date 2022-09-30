@@ -13,12 +13,17 @@ public class TaskGraphAssertionsPlugin : Plugin<Project> {
         target.gradle.taskGraph.whenReady { graph ->
             val allTaskPaths: Set<String> = graph.allTasks.map { it.path }.toSet()
 
-            val isInSilentMode = extension.silentMode.convention(false).get()
+            val logger = Logger(
+                logger = target.logger,
+                logLevelProvider = extension.logLevel
+            )
 
-            extension.whenTaskRequested.all { assertions ->
+            extension.whenExecuted.all { assertions ->
                 val requestedTask = assertions.name
 
-                if (allTaskPaths.contains(requestedTask)) {
+                if (!allTaskPaths.contains(requestedTask)) {
+                    logger.log("Task '$requestedTask' was not executed. Skip assertions")
+                } else {
 
                     val container = AssertionsContainer(
                         path = requestedTask,
@@ -36,9 +41,7 @@ public class TaskGraphAssertionsPlugin : Plugin<Project> {
                         container.assertProjectProperties(it)
                     }
 
-                    if (!isInSilentMode) {
-                        target.logger.lifecycle("Task '$requestedTask' was requested. All assertions are OK!")
-                    }
+                    logger.log("Task '$requestedTask' was executed. All assertions are OK!")
                 }
             }
         }

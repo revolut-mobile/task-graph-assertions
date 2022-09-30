@@ -109,15 +109,17 @@ class TaskGraphAssertionsPluginTest {
         projectDir.file("settings.gradle", "rootProject.name = 'test-project'")
         projectDir.file(
             "build.gradle", """
+            |import org.gradle.api.logging.LogLevel
+            |
             |plugins {
             |   id 'base'
             |   id 'com.revolut.task-graph-assertions'
             |}
             |
             |taskGraphAssertions {
-            |   silentMode.set(false)
+            |   logLevel.set(LogLevel.LIFECYCLE)
             |   
-            |   whenTaskRequested {
+            |   whenExecuted {
             |       $pluginConfig
             |   }
             |}
