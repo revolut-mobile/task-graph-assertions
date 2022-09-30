@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.6.10"
     id("com.gradle.plugin-publish") version "1.0.0"
 }
 
 group = "com.revolut"
-version = "0.1"
+version = "0.2"
 
 repositories {
     mavenCentral()
@@ -33,6 +33,11 @@ tasks.withType<KotlinCompile>().configureEach {
 
 kotlin {
     explicitApi()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 gradlePlugin {
