@@ -19,7 +19,7 @@ class TaskGraphAssertionsPluginTest {
             |""".trimMargin()
         )
         val result = assertBuildSuccess(projectDir, ":build")
-        Truth.assertThat(result.output).contains("Task ':build' was requested. All assertions are OK!")
+        Truth.assertThat(result.output).contains("Task ':build' was executed. All assertions are OK!")
     }
 
     @Test
@@ -58,7 +58,7 @@ class TaskGraphAssertionsPluginTest {
             |""".trimMargin()
         )
         val result = assertBuildSuccess(projectDir, ":build")
-        Truth.assertThat(result.output).contains("Task ':build' was requested. All assertions are OK!")
+        Truth.assertThat(result.output).contains("Task ':build' was executed. All assertions are OK!")
     }
 
     @Test
@@ -71,7 +71,7 @@ class TaskGraphAssertionsPluginTest {
             |""".trimMargin()
         )
         val result = assertBuildSuccess(projectDir, ":build", "-PcustomProperty=true")
-        Truth.assertThat(result.output).contains("Task ':build' was requested. All assertions are OK!")
+        Truth.assertThat(result.output).contains("Task ':build' was executed. All assertions are OK!")
     }
 
     @Test
@@ -84,7 +84,7 @@ class TaskGraphAssertionsPluginTest {
             |""".trimMargin()
         )
         val result = assertBuildFailed(projectDir, ":build")
-        Truth.assertThat(result.output).contains("Required project property is missing: 'customProperty'")
+        Truth.assertThat(result.output).contains("[$TAG] Required project property is missing: 'customProperty'")
     }
 
     @Test

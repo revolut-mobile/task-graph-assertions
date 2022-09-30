@@ -9,13 +9,11 @@ internal class Logger(
     logLevelProvider: Property<LogLevel>
 ) {
 
-    private val tag = "TaskGraphAssertionsPlugin"
-
     private val defaultLogLevel = LogLevel.LIFECYCLE
 
     private val logLevel = logLevelProvider.convention(defaultLogLevel).get()
 
     fun log(message: String) {
-        logger.log(logLevel, "[$tag] $message")
+        logger.log(logLevel, "[$TAG] $message")
     }
 }

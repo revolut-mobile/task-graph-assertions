@@ -4,6 +4,8 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
 
+internal const val TAG: String = "TaskGraphAssertionsPlugin"
+
 public class TaskGraphAssertionsPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {

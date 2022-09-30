@@ -9,7 +9,7 @@ internal class AssertionsContainer(
     fun assertTasksTriggered(tasks: Set<String>) {
         val missingTasks = tasks.filter { !allTasksPaths.contains(it) }
         if (missingTasks.isNotEmpty()) {
-            throw AssertionError(
+            throwError(
                 buildString {
                     appendLine("Task '$path' dependencies error:")
                     appendLine("Tasks are expected, but not triggered: $missingTasks")
@@ -21,7 +21,7 @@ internal class AssertionsContainer(
     fun assertTasksNotTriggered(tasks: Set<String>) {
         val unexpectedTasks = tasks.filter { allTasksPaths.contains(it) }
         if (unexpectedTasks.isNotEmpty()) {
-            throw AssertionError(
+            throwError(
                 buildString {
                     appendLine("Task '$path' dependencies error:")
                     appendLine("Tasks triggered, but should not: $unexpectedTasks")
@@ -36,11 +36,11 @@ internal class AssertionsContainer(
 
     private fun assertProjectProperty(key: String, expectedValue: String) {
         if (!properties.containsKey(key)) {
-            throw AssertionError("Required project property is missing: '$key'")
+            throwError("Required project property is missing: '$key'")
         } else {
             val actualValue = properties[key]
             if (expectedValue != actualValue) {
-                throw AssertionError(
+                throwError(
                     buildString {
                         appendLine("Expected project property value for key: '$key' differs from the actual one:")
                         appendLine("    Expected: '$expectedValue'")
@@ -49,5 +49,9 @@ internal class AssertionsContainer(
                 )
             }
         }
+    }
+
+    private fun throwError(message: String) {
+        throw AssertionError("[$TAG] $message")
     }
 }
