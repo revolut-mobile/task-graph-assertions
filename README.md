@@ -2,6 +2,12 @@
 
 Add assertions to be aware that your complex gradle build tasks hierarchy is still here.
 
+## When to use it?
+
+Most common scenario is to create a safety net of assertions for 
+[Lifecycle tasks](https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:lifecycle_tasks) 
+declared in [precompiled convention plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html#compiling_convention_plugins)
+
 ## How to use
 
 1. Configure desired checks by applying plugin to project (root or whatever project/module you need to check)
@@ -12,6 +18,17 @@ Add assertions to be aware that your complex gradle build tasks hierarchy is sti
     }
     
     taskGraphAssertions {
+   
+        whenRequested {
+            register(":check") {
+                
+                assertTasksTriggered.addAll(":test")
+    
+                assertTasksNotTriggered.addAll(":assemble")
+    
+                assertProjectProperties.put("customProperty", "true")
+            }
+        }
     
         whenExecuted {
             register(":build") {
@@ -33,6 +50,12 @@ Add assertions to be aware that your complex gradle build tasks hierarchy is sti
     ```
 
    Check build log for message: `Task ':build' was requested. All assertions are OK!`
+
+## Requested vs Executed
+
+Requested tasks are the ones that you manually write after `./gradlew <HERE>`.
+
+Executed tasks are every task that is executed during th build. (Always including one that requested)
 
 ## CI usage
 

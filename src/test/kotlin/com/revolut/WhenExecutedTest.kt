@@ -1,13 +1,11 @@
 package com.revolut
 
 import com.google.common.truth.Truth
-import org.gradle.testkit.runner.BuildResult
-import org.gradle.testkit.runner.GradleRunner
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
 
-class TaskGraphAssertionsPluginTest {
+class WhenExecutedTest {
 
     @Test
     fun `required task triggered - build success`(@TempDir projectDir: File) {
@@ -125,21 +123,5 @@ class TaskGraphAssertionsPluginTest {
             |}
             |""".trimMargin()
         )
-    }
-
-    private fun assertBuildSuccess(projectDir: File, vararg args: String): BuildResult {
-        return createRunner(projectDir, args).build()
-    }
-
-    private fun assertBuildFailed(projectDir: File, vararg args: String): BuildResult {
-        return createRunner(projectDir, args).buildAndFail()
-    }
-
-    private fun createRunner(projectDir: File, args: Array<out String>): GradleRunner {
-        return GradleRunner.create()
-            .withProjectDir(projectDir)
-            .withPluginClasspath()
-            .forwardOutput()
-            .withArguments(listOf("--dry-run").plus(args))
     }
 }
